@@ -10,7 +10,7 @@ const Cards = ({ characters }) => {
                status={status}
                species={species}
                gender={gender}
-               origin={origin}
+               origin={origin.name}
                image={image}
             />
          })}
