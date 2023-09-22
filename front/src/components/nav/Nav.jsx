@@ -1,10 +1,19 @@
 import SearchBar from "../searchbar/SearchBar"
+import {Link} from "react-router-dom";
 
 const Nav = ({onSearch}) => {
   return (
     <div>
+      <Link to="/about">
+        <button>About</button>
+      </Link>
+      <Link to="/home">
+        <button>Home</button>
+      </Link>
       <SearchBar onSearch={onSearch}/>
-      <button onClick={() => onSearch(Math.floor(Math.random() * 826) + 1)}>Random</button>
+      <Link to="/">
+        <button>Log out</button>
+      </Link>
     </div>
   );
 };

@@ -15,6 +15,7 @@ const SearchBar = ({onSearch}) => {
             value={id}  
          />
          <button onClick={() => onSearch(id)}>Agregar</button>
+         <button onClick={() => onSearch(Math.floor(Math.random() * 826) + 1)}>Random</button>
       </div>
    );
 };
