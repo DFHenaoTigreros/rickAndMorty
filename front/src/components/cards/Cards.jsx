@@ -1,17 +1,17 @@
 import Card from "../card/Card";
+import "./Cards.css";
 
 const Cards = ({characters, onClose}) => {
    return( 
-      <div>
-         {characters.map(({id, name, species, gender, image}) => {
+      <div className="cards">
+         {characters.map(({id, name, image, gender}) => {
             return <Card 
                key={id}
                id={id}
-               name={name}
-               species={species}
-               gender={gender}
-               image={image}
                onClose={onClose}
+               name={name}
+               image={image}
+               gender={gender}
             />
          })}
       </div>
