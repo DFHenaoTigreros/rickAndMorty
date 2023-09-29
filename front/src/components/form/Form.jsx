@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useState} from "react";
 import validation from "./validation";
 
 const Form = ({login}) => {
@@ -12,15 +12,15 @@ const Form = ({login}) => {
   const handleChange = (event) => {
     setUserData({...userData, [event.target.name]: event.target.value});
     setErrors(validation({...userData, [event.target.name]: event.target.value}));
-  }
+  };
 
   const handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     login(userData)
-  }
+  };
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <label htmlFor="email">Email: </label>
       <input type="email" name="email" value={userData.email} onChange={handleChange}/>
       {errors.email && <p style={{color: "red"}}>{errors.email}</p>}
@@ -33,7 +33,7 @@ const Form = ({login}) => {
 
       <hr style={{ borderStyle: "none"}} />
 
-      <button onClick={handleSubmit} type="submit" disabled={!userData.email || !userData.password || errors.email || errors.password}>Submit</button>
+      <button type="submit" disabled={!userData.email || !userData.password || errors.email || errors.password}>Submit</button>
     </form>
   );
 };

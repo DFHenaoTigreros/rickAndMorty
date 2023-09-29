@@ -1,12 +1,51 @@
-import {Link} from "react-router-dom";
+import {useState, useEffect} from "react";
+import {Link, useLocation} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux"
+import {addFav, removeFav} from "../../redux/actions/actions";
 
-const Card = ({id, name, species, gender, image, onClose}) => {
+const Card = ({id, onClose, name, image, gender}) => {
+   const dispatch = useDispatch();
+
+   const [isFav, setIsFav] = useState(false);
+
+   const {myFavorites} = useSelector((state) => state);
+
+   const {pathname} = useLocation()
+
+   const handleFavorite = () => {
+      if (isFav === true) {
+         setIsFav(false);
+         dispatch(removeFav(id));
+      };
+      if (isFav === false) {
+         setIsFav(true);
+         dispatch(addFav({id, onClose, name, image, gender}));
+      }
+   }
+
+   useEffect(() => {
+      myFavorites?.forEach((fav) => {
+         if (fav.id === id) {
+            setIsFav(true);
+         }
+      });
+   }, [myFavorites]);
+
    return (
       <div>
-         <button onClick={() => onClose(id)}>X</button>
+         {
+            isFav ? (
+               <button onClick={handleFavorite}>💚</button>
+            ) : (
+               <button onClick={handleFavorite}>🤍</button>
+            )
+         }
+         {
+            pathname !== "/favorites"
+            ? <button onClick={() => onClose(id)}>X</button>
+            : ""
+         }
          <h2>{name}</h2>
-         <h2>{species}</h2>
-         <h2>{gender}</h2>
          <Link to={`/detail/${id}`} >
             <img src={image} alt={name} />
          </Link>
