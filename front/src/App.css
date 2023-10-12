@@ -1,0 +1,20 @@
+@font-face {
+  font-family: "get-schwifty";
+  src: url("../font/get_schwifty.ttf") format('truetype');
+}
+
+:root {
+  font-family: "get-schwifty";
+
+  color-scheme: dark;
+  background-image: url(../img/space.gif); 
+  background-size: cover;
+  background-attachment: fixed;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+}

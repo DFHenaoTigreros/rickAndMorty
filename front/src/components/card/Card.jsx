@@ -2,6 +2,7 @@ import {useState, useEffect} from "react";
 import {Link, useLocation} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux"
 import {addFav, removeFav} from "../../redux/actions/actions";
+import "./Card.css"
 
 const Card = ({id, onClose, name, image, gender}) => {
    const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const Card = ({id, onClose, name, image, gender}) => {
    }, [myFavorites]);
 
    return (
-      <div>
+      <div className="card">
          {
             isFav ? (
                <button onClick={handleFavorite}>💚</button>

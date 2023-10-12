@@ -10,12 +10,9 @@ import Error from "./components/error/Error";
 import Favorites from "./components/favorites/Favorites";
 import Form from "./components/form/Form";
 import Nav from "./components/nav/Nav"
+import "./App.css"
 
 const App = () => {
-  const EMAIL = "davidhenao3105@gmail.com";
-
-  const PASSWORD = "Dafeheti31";
-
   const {pathname} = useLocation();
 
   const navigate = useNavigate();
@@ -26,14 +23,15 @@ const App = () => {
 
   const dispatch = useDispatch();
 
-  const onSearch = (id) => {
-    axios(`https://rickandmortyapi.com/api/character/${id}`)
-    .then(({data}) => {
+  const onSearch = async (id) => {
+    try {
+      const {data} = await axios(`http://localhost:3001/rickandmorty/character/${id}`)
       if (!characters.some((character) => character.id === data.id)) {
         setCharacters((oldChars) => [...oldChars, data]);
       } else {alert('¡Ya Hay personajes con este ID!')}
-    })
-    .catch(() => alert('¡No hay personajes con este ID!'))
+    } catch (error) {
+      alert('¡No hay personajes con este ID!')
+    }
   };
 
   const onClose = (id) => {
@@ -41,10 +39,16 @@ const App = () => {
     dispatch(removeFav(id))
   };
 
-  const login = (userData) => {
-    if(userData.password === PASSWORD && userData.email === EMAIL) {
-      setAccess(true);
-      navigate("/home");
+  const login = async (userData) => {
+    try {
+      const { email, password } = userData;
+      const URL = "http://localhost:3001/rickandmorty/login/";
+      const {data} = await axios(URL + `?email=${email}&password=${password}`);
+      const {access} = data;
+      setAccess(data);
+      access && navigate('/home');
+    } catch (error) {
+      throw Error(error.message);
     }
   }
 
