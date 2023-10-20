@@ -33,22 +33,23 @@ const Card = ({id, onClose, name, image, gender}) => {
    }, [myFavorites]);
 
    return (
-      <div className="card">
+      <div className="card pass">
          {
             isFav ? (
-               <button onClick={handleFavorite}>💚</button>
+               <button className="favorite" onClick={handleFavorite}>💚</button>
             ) : (
-               <button onClick={handleFavorite}>🤍</button>
+               <button className="favorite" onClick={handleFavorite}>🤍</button>
             )
          }
          {
             pathname !== "/favorites"
-            ? <button onClick={() => onClose(id)}>X</button>
+            ? <button className="close" onClick={() => onClose(id)}>X</button>
             : ""
          }
-         <h2>{name}</h2>
+         <h2 className="name">{name}</h2>
          <Link to={`/detail/${id}`} >
-            <img src={image} alt={name} />
+            <img className="image" src={image} alt={name} />
+            <button className="number">{id}</button>
          </Link>
       </div>
    );

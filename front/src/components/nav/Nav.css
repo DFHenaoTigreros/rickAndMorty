@@ -1,16 +1,16 @@
 .nav {
-  padding: 10px; 
   display: flex; 
   justify-content: space-evenly; 
   align-items: center;
   top: 0; 
   width: 100%; 
+  margin: 20px auto;
 }
 
 .nav-button {
   border-radius: 5px;
   border: 1px solid greenyellow;
-  padding: 6px 12px;
+  padding: 4px 8px;
   font-size: inherit;
   font-family: inherit;
   background-color: transparent;
@@ -43,7 +43,7 @@
 
 .search-bar {
   flex-grow: 1; 
-  margin-left: 100px;
+  margin-left: 50px;
   margin-right: 10px;
   outline: none;
   background-color: transparent;
@@ -51,21 +51,18 @@
   border: transparent;
   border-bottom: 3px solid greenyellow;
   transition: background-color 1s, color 1s, border 1s, transform 1s;
+  font-family: inherit;
 }
 
 .search-bar:hover {
   background-color: black;
   color: white;
-  border: 3px solid yellowgreen;
+  border: 3px solid greenyellow;
   transform: scale(1.1);
 }
 
-.search-bar::-webkit-clear-button{
-  color: red;
-}
-
 .title {
-  width: 300px;
+  width: 220px;
   height: auto;
-  margin-left: 100px;
+  margin-left: 60px;
 }

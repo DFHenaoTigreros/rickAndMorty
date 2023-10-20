@@ -23,7 +23,25 @@ const App = () => {
 
   const dispatch = useDispatch();
 
+  const all = async () => {
+    for (let i = 1; i < 827; i++) {
+      try {
+        const {data} = await axios(`http://localhost:3001/rickandmorty/character/${i}`)
+        if (!characters.some((character) => character.id === i)) {
+          setCharacters((oldChars) => [...oldChars, data]);
+        } else {alert('¡Ya Hay personajes con este ID!')}
+      } catch (error) {
+        alert('¡No hay personajes con este ID!')
+      }
+    }
+  }
+
+
   const onSearch = async (id) => {
+    if (id === "clean") {
+      setCharacters([]);
+      return
+    }
     try {
       const {data} = await axios(`http://localhost:3001/rickandmorty/character/${id}`)
       if (!characters.some((character) => character.id === data.id)) {
@@ -58,7 +76,7 @@ const App = () => {
 
   return (
     <div className='App'>
-      {pathname !== "/" && <Nav onSearch={onSearch} />}
+      {pathname !== "/" && <Nav onSearch={onSearch} all={all}/>}
       <Routes>
         <Route path="/" element={<Form login={login}/>}/>
         <Route path="/home" element={<Cards characters={characters} onClose={onClose}/>}/>

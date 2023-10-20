@@ -1,0 +1,97 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  max-width: 350px;
+  padding: 20px;
+  border: 5px solid greenyellow;
+  border-radius: 5%;
+  background-color:  black;
+  text-align: center;
+  margin-top: 90px;
+  height: 400px;
+  box-shadow: 0 0 0px rgba(0, 0, 0, 0), 0 0 50px greenyellow;
+  transition: transform 0.5s; 
+}
+.form:hover {
+  transform: scale(1.1);
+  background-color: rgba(0, 0, 0, 0.7); ;
+  box-shadow: 0 0 0px rgba(0, 0, 0, 0), 0 0 50px greenyellow;
+}
+
+.login-image {
+  width: auto;
+  height: 200px;
+  margin-right: 110px;
+  margin-left: 110px;
+}
+
+.label {
+  font-weight: bold;
+  color: greenyellow;
+  font-size: 14px;
+  margin-right: 15px;
+}
+
+.input {
+  flex-grow: 1; 
+  outline: none;
+  background-color: transparent;
+  color: white;
+  border: 2px solid greenyellow;
+  transition: background-color 1s, color 1s, border 1s, transform 1s;
+  cursor: pointer;
+  width: 70%;
+  margin-top: 10px;
+  border-radius: 5px;
+  font-family: inherit;
+}
+
+.input:hover {
+  background-color: greenyellow;
+  color: black;
+  border: 3px solid greenyellow;
+  transform: scale(1.1);
+}
+
+.error {
+  color: white;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.submit-button {
+  border-radius: 5px;
+  border: 3px solid white;
+  font-size: inherit;
+  font-family: inherit;
+  background-color: greenyellow;
+  cursor: pointer;
+  transition: border-color 1s, background-color 1s, color 1s, border 1s;
+  text-decoration: none; 
+  margin-top: 10px;
+  color: black;
+}
+
+.nav-button:hover {
+  background-color: greenyellow; 
+  color: black; 
+  border: 3px solid  greenyellow; 
+}
+
+.submit-button:focus,
+.submit-button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+  background-color: greenyellow; 
+  color: black; 
+  border: 3px solid  black; 
+}
+
+.submit-button:disabled {
+  background-color: black;
+  color: greenyellow;
+  cursor: not-allowed;
+}

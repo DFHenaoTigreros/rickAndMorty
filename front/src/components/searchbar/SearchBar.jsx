@@ -2,7 +2,7 @@ import {useState} from "react";
 import {Link} from "react-router-dom";
 import "../nav/Nav";
 
-const SearchBar = ({onSearch}) => {
+const SearchBar = ({onSearch, all}) => {
    const [id, setId] = useState("")
 
    const handleChange = (event) => {
@@ -18,8 +18,10 @@ const SearchBar = ({onSearch}) => {
             className="search-bar"
          />
          <Link to="/home">
-            <button onClick={() => id !== "" ? onSearch(id) : onSearch()}className="nav-button">Agregar</button>
-            <button onClick={() => onSearch(Math.floor(Math.random() * 826) + 1)}className="nav-button">Random</button>
+            <button onClick={() => id !== "" ? onSearch(id) : onSearch()} className="nav-button">Add</button>
+            <button onClick={() => onSearch(Math.floor(Math.random() * 826) + 1)} className="nav-button">Random</button>
+            <button onClick={() => all()} className="nav-button">All</button>
+            <button onClick={() => onSearch("clean")} className="nav-button">Clean</button>
          </Link>
       </div>
    );

@@ -3,6 +3,7 @@ import {useSelector, useDispatch} from "react-redux";
 import Cards from "../cards/Cards";
 import {filterCards, orderCards} from "../../redux/actions/actions";
 import Select from "../select/Select";
+import "./Favorites.css"
 
 const Favorites = () => {
   const {myFavorites} = useSelector((state) => state);
@@ -26,11 +27,13 @@ const Favorites = () => {
         name="order"
         options={["Ascendente", "Descendente"]}
         handleChange={handleChange}
+        className={"button"}
       />
       <Select
           name="filter"
           options={["All", "Male", "Female", "Genderless", "unknown"]}
           handleChange={handleChange}
+          className={"button"}
       />
       <Cards characters={myFavorites}/>
     </div>

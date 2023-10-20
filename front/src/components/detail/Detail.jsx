@@ -1,6 +1,7 @@
 import {useState, useEffect} from "react";
 import {useParams} from "react-router-dom";
 import axios from "axios";
+import "./Detail.css"
 
 const Detail = () => {
   const {id} = useParams()
@@ -19,17 +20,28 @@ const Detail = () => {
    return setCharacter({});
   }, [id]);
 
+  const episode = character.episode?.map((episode, i, array) => {
+    if(i === array.length - 1) {
+      return episode
+    }
+    return `${episode}, `
+  })
+
   return (
-    <div>
-      <h2>{character.name}</h2>
-      <img src={character.image} alt={character.name} />
-      <h3>STATUS: {character.status}</h3>
-      <h3>SPECIE: {character.species}</h3>
-      <h3>TYPE: {character.type}</h3>
-      <h3>GENDER: {character.gender}</h3>
-      <h3>ORIGIN: {character.origin?.name}</h3>
-      <h3>LOCATION: {character.location?.name}</h3>
-      <h3>EPISODE: {character.episode}</h3>
+    <div className="detail">
+      <div className="right">
+        <h2 className="name-detail">{character.name}</h2>
+        <img className="image-detail" src={character.image} alt={character.name}/>
+      </div>
+      <div className="left">
+        <h3 className="text">STATUS: {character.status}</h3>
+        <h3 className="text">SPECIE: {character.species}</h3>
+        <h3 className="text">TYPE: {character.type}</h3>
+        <h3 className="text">GENDER: {character.gender}</h3>
+        <h3 className="text">ORIGIN: {character.origin?.name}</h3>
+        <h3 className="text">LOCATION: {character.location?.name}</h3>
+        <h3 className="text">EPISODE: {episode}</h3>
+      </div>
     </div>
   );
 };
