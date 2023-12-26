@@ -1,27 +1,61 @@
 import {useState} from "react";
 import {Link} from "react-router-dom";
 import "../nav/Nav";
+import {useDispatch, useSelector} from "react-redux";
+import {clear, searchCharacters, allCharacters, addRandom} from "../../redux/actions/actions";
+import axios from "axios";
 
-const SearchBar = ({onSearch, all}) => {
-   const [id, setId] = useState("")
+const SearchBar = () => {
+   const {characters} = useSelector((state) => state);
+
+   const dispatch = useDispatch();
+
+   const [name, setName] = useState("");
 
    const handleChange = (event) => {
-      setId(event.target.value)
-   }
+      setName(event.target.value);
+   };
+
+   const onSearchByName = () => {
+      dispatch(searchCharacters(name));
+   };
+
+   const onClear = () => {
+      dispatch(clear())
+   };
+
+   const all = async () => {
+      dispatch(allCharacters());
+   };
+
+   const random = async (id) => {
+      try {
+         const {data} = await axios(`http://localhost:3001/rickandmorty/character/${id}`);
+         if (!characters.some((character) => character.id === data.id)) {
+            dispatch(addRandom(data));
+            setTimeout(() => {
+               alert(`¡Personaje ${data.name} agregado!`);
+            }, 150);
+         } else {alert(`¡Personaje ${data.name} ya había sido agregado!`)}
+      } catch (error) {
+         alert(`¡Error al agregar personaje!`)
+      };
+   };
 
    return (
       <div>
          <input 
             type="search" 
             onChange={handleChange}
-            value={id}  
+            value={name}  
             className="search-bar"
+            placeholder="Search character by name"
          />
-         <Link to="/home">
-            <button onClick={() => id !== "" ? onSearch(id) : onSearch()} className="nav-button">Add</button>
-            <button onClick={() => onSearch(Math.floor(Math.random() * 826) + 1)} className="nav-button">Random</button>
+         <Link to="/">
+            <button onClick={() => onSearchByName()} className="nav-button">Add</button>
+            <button onClick={() => random(Math.floor(Math.random() * 826) + 1)} className="nav-button">Random</button>
             <button onClick={() => all()} className="nav-button">All</button>
-            <button onClick={() => onSearch("clean")} className="nav-button">Clean</button>
+            <button onClick={() => onClear()} className="nav-button">Clear</button>
          </Link>
       </div>
    );

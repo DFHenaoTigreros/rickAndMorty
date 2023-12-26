@@ -38,8 +38,8 @@ const Detail = () => {
         <h3 className="text">SPECIE: {character.species}</h3>
         <h3 className="text">TYPE: {character.type}</h3>
         <h3 className="text">GENDER: {character.gender}</h3>
-        <h3 className="text">ORIGIN: {character.origin?.name}</h3>
-        <h3 className="text">LOCATION: {character.location?.name}</h3>
+        <h3 className="text">ORIGIN: {character.origin}</h3>
+        <h3 className="text">LOCATION: {character.location}</h3>
         <h3 className="text">EPISODE: {episode}</h3>
       </div>
     </div>

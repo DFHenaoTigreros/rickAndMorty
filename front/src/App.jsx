@@ -1,8 +1,8 @@
 import {useState, useEffect} from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Routes, Route, useLocation, useNavigate} from "react-router-dom";
 import axios from "axios";
-import {removeFav} from "./redux/actions/actions";
+import {removeFav, allCharacters} from "./redux/actions/actions";
 import About from "./components/about/About";
 import Cards from "./components/cards/Cards";
 import Detail from "./components/detail/Detail";
@@ -17,40 +17,11 @@ const App = () => {
 
   const navigate = useNavigate();
 
-  const [characters, setCharacters] = useState([])
+  const {characters} = useSelector((state) => state);
 
   const [access, setAccess] = useState(false);
 
   const dispatch = useDispatch();
-
-  const all = async () => {
-    for (let i = 1; i < 827; i++) {
-      try {
-        const {data} = await axios(`http://localhost:3001/rickandmorty/character/${i}`)
-        if (!characters.some((character) => character.id === i)) {
-          setCharacters((oldChars) => [...oldChars, data]);
-        } else {alert('¡Ya Hay personajes con este ID!')}
-      } catch (error) {
-        alert('¡No hay personajes con este ID!')
-      }
-    }
-  }
-
-
-  const onSearch = async (id) => {
-    if (id === "clean") {
-      setCharacters([]);
-      return
-    }
-    try {
-      const {data} = await axios(`http://localhost:3001/rickandmorty/character/${id}`)
-      if (!characters.some((character) => character.id === data.id)) {
-        setCharacters((oldChars) => [...oldChars, data]);
-      } else {alert('¡Ya Hay personajes con este ID!')}
-    } catch (error) {
-      alert('¡No hay personajes con este ID!')
-    }
-  };
 
   const onClose = (id) => {
     setCharacters(characters.filter((character) => character.id != id))
@@ -64,22 +35,23 @@ const App = () => {
       const {data} = await axios(URL + `?email=${email}&password=${password}`);
       const {access} = data;
       setAccess(data);
-      access && navigate('/home');
+      access && navigate('/');
     } catch (error) {
       throw Error(error.message);
     }
   }
 
   useEffect(() => {
+    dispatch(allCharacters());
     !access;
   }, [access]);
 
   return (
     <div className='App'>
-      {pathname !== "/" && <Nav onSearch={onSearch} all={all}/>}
+      {pathname !== "/login" && <Nav />}
       <Routes>
-        <Route path="/" element={<Form login={login}/>}/>
-        <Route path="/home" element={<Cards characters={characters} onClose={onClose}/>}/>
+        <Route path="/login" element={<Form login={login}/>}/>
+        <Route path="/" element={<Cards characters={characters} onClose={onClose}/>}/>
         <Route path="/about" element={<About/>}/>
         <Route path="/detail/:id" element={<Detail/>}/>
         <Route path="/favorites" element={<Favorites />}/>

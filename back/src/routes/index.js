@@ -1,4 +1,5 @@
-const {getAllCharacters} = require("../controllers/getAllCharacters")
+const {getAllCharacters} = require("../controllers/getAllCharacters");
+const {getCharByName} = require("../controllers/getCharByName");
 const {getCharById} = require("../controllers/getCharById");
 const {login} = require("../controllers/login");
 const {postFav} = require("../controllers/postFav");
@@ -8,6 +9,8 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/character/", getAllCharacters);
+
+router.get("/character/name", getCharByName);
 
 router.get("/character/:id", getCharById);
 
