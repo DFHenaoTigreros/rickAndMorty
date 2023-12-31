@@ -1,10 +1,5 @@
-@font-face {
-  font-family: "get-schwifty";
-  src: url("../font/get_schwifty.ttf") format('truetype');
-}
-
 :root {
-  font-family: "get-schwifty";
+  font-family: sans-serif;
   color-scheme: dark;
   background-image: url(../img/space.gif); 
   background-size: cover;

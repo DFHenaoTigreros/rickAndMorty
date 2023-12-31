@@ -1,7 +1,10 @@
-const Select = ({ name, options, handleChange, className }) => {
-  return(
-    <select key={name} name={name} onChange={handleChange} className={className}>
-      {options.map((option) => {return <option value={option}>{option}</option>})}
+import "./Select.css"
+
+const Select = ({name, options, handleChange}) => {
+
+  return (
+    <select key={name} name={name} onChange={handleChange} className={"button"}>
+      {options.map((option) => <option value={option}>{option}</option>)}
     </select>
   );
 };

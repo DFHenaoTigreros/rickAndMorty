@@ -1,8 +1,14 @@
+import axios from "axios";
 import {useState} from "react";
+import {useNavigate, Link, useLocation} from "react-router-dom";
 import validation from "./validation";
 import "./Form.css";
 
-const Form = ({login}) => {
+const Form = () => {
+  const navigate = useNavigate();
+
+  const {pathname} = useLocation();
+
   const [userData, setUserData] = useState({
     email: "",
     password: ""
@@ -17,8 +23,20 @@ const Form = ({login}) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    login(userData)
+    login();
   };
+
+  const login = async () => {
+    try {
+      const { email, password } = userData;
+      pathname === "/login" ? await axios(`http://localhost:3001/rickandmorty/login/?email=${email}&password=${password}`) : await axios.post("http://localhost:3001/rickandmorty/login/", userData);
+      const {access} = data;
+      setAccess(data);
+      access && navigate('/');
+    } catch (error) {
+      throw Error(error.message);
+    }
+  }
 
   return (
     <div className="container">
@@ -35,6 +53,8 @@ const Form = ({login}) => {
 
         <button type="submit" className="submit-button" disabled={!userData.email || !userData.password || errors.email || errors.password}>Submit
         </button>
+
+        {pathname === "/login" ? <p className="error">{"Si no tienes cuenta "}<Link to="/register">Registrate</Link></p> : <p className="error">{"Si ya tienes cuenta "}<Link to="/login">Logueate</Link></p>}
       </form>
     </div>
   );

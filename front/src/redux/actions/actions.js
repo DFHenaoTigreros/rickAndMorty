@@ -1,5 +1,5 @@
 import axios from "axios";
-import {ADD_FAV, REMOVE_FAV, FILTER, ORDER, CHARACTERS, CLEAR, SEARCH_CHARACTERS, RANDOM} from "../action-types/action-types";
+import {ADD_FAV, REMOVE_FAV, ORDER, STATUS, SPECIES, GENDER, EPISODE, CHARACTERS, CLEAR, SEARCH_CHARACTERS, RANDOM, DELETE_CHARACTER} from "../action-types/action-types";
 
 const endpoint = "http://localhost:3001/rickandmorty/";
 
@@ -23,9 +23,15 @@ export const removeFav = (id) => {
     };
   };
 };
-export const filterCards = (gender) => { return {type: FILTER, payload: gender} };
+export const orderCards = (order) => { return {type: ORDER, payload: order} };
 
-export const orderCards = (orden) => { return {type: ORDER, payload: orden} };
+export const filterStatus = (status) => { return {type: STATUS, payload: status} };
+
+export const filterSpecies = (species) => { return {type: SPECIES, payload: species} };
+
+export const filterGender = (gender) => { return {type: GENDER, payload: gender} };
+
+export const filterEpisode = (episode) => { return {type: EPISODE, payload: episode} };
 
 export const allCharacters = () => {
   return async (dispatch) => {
@@ -52,6 +58,9 @@ export const searchCharacters = (name) => {
 };
 
 export const addRandom = (data) => { return {type: RANDOM, payload: data} };
+
+export const deleteCharacter = (id) => { return {type: DELETE_CHARACTER, payload: id} };
+
 
 
 

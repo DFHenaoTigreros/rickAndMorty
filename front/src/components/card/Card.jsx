@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux"
 import {addFav, removeFav} from "../../redux/actions/actions";
 import "./Card.css"
 
-const Card = ({id, onClose, name, image, gender}) => {
+const Card = ({id, onClose, name, image}) => {
    const dispatch = useDispatch();
 
    const [isFav, setIsFav] = useState(false);
@@ -20,13 +20,13 @@ const Card = ({id, onClose, name, image, gender}) => {
       };
       if (isFav === false) {
          setIsFav(true);
-         dispatch(addFav({id, onClose, name, image, gender}));
+         dispatch(addFav({id, onClose, name, image}));
       }
    }
 
    useEffect(() => {
       myFavorites?.forEach((fav) => {
-         if (fav.id === id) {
+         if (fav.id == id) {
             setIsFav(true);
          }
       });

@@ -4,20 +4,21 @@ module.exports = (sequelize) => {
   sequelize.define("Character", {
     id: {
       type: DataTypes.STRING,
-      allowNull: true,
-      primaryKey: true
+      allowNull: false,
+      primaryKey: true,
+      unique: true
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: false
     },
     status: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: false
     },
     species: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: false
     },
     type: {
       type: DataTypes.STRING,
@@ -25,23 +26,24 @@ module.exports = (sequelize) => {
     },
     gender: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: false
     },
     origin: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: false
     },
     location: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: false
     },
     image: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: false,
+      unique: true
     },
     episode: {
       type: DataTypes.ARRAY(DataTypes.STRING),
-      allowNull: true
+      allowNull: false
     }
   }, {timestamps: false});
 };

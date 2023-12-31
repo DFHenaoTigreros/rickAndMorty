@@ -4,7 +4,6 @@
   align-items: center;
   top: 0; 
   width: 100%; 
-  margin: 20px auto;
 }
 
 .nav-button {
@@ -17,7 +16,7 @@
   cursor: pointer;
   transition: border-color 1s, background-color 1s, color 1s, border 1s;
   text-decoration: none; 
-  margin-right: 10px;
+  margin: 10px;
   color: white;
 }
 
@@ -43,8 +42,7 @@
 
 .search-bar {
   flex-grow: 1; 
-  margin-left: 50px;
-  margin-right: 10px;
+  margin: 10px;
   outline: none;
   background-color: transparent;
   color: white;
@@ -64,5 +62,5 @@
 .title {
   width: 220px;
   height: auto;
-  margin-left: 60px;
+  margin: 10px;
 }
