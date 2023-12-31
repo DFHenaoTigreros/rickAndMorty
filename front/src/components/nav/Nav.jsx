@@ -10,7 +10,6 @@ const Nav = ({onSearch, all}) => {
       <Button link="/favorites" text="Favorites" className="nav-button"/>
       <img src="../img/title.png" alt="RickandMorty" className="title"/>
       <SearchBar onSearch={onSearch} all={all}/>
-      <Button link="/login" text="Log out" className="nav-button nav-button-out"/>
     </nav>
   );
 };

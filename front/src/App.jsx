@@ -26,15 +26,17 @@ const App = () => {
     dispatch(allCharacters());
   }, []);
 
+  const paths = ["/", "/about", "/detail:id", "/favorites"];
+
   return (
     <div className='App'>
-      {pathname !== "/login" && pathname !== "/register" ? <Nav /> : null}
+      {paths.includes(pathname) && <Nav />}
       <Routes>
-        <Route path="/login" element={<Form />}/>
         <Route path="/" element={<Cards characters={characters} onClose={onClose}/>}/>
         <Route path="/about" element={<About/>}/>
         <Route path="/detail/:id" element={<Detail/>}/>
         <Route path="/favorites" element={<Favorites />}/>
+        <Route path="/login" element={<Form />}/>
         <Route path="/register" element={<Form />}/>
         <Route path="*" element={<Error />}/>
       </Routes>

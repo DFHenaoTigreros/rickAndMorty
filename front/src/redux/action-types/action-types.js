@@ -10,4 +10,5 @@ export const CLEAR = "CLEAR";
 export const SEARCH_CHARACTERS = "SEARCH_CHARACTERS";
 export const RANDOM = "RANDOM";
 export const DELETE_CHARACTER = "DELETE_CHARACTER";
+export const ACCESS = "ACCESS";
 

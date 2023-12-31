@@ -2,11 +2,11 @@ import {useState} from "react";
 import {Link} from "react-router-dom";
 import "../nav/Nav";
 import {useDispatch, useSelector} from "react-redux";
-import {clear, searchCharacters, allCharacters, addRandom} from "../../redux/actions/actions";
+import {clear, searchCharacters, allCharacters, addRandom, log} from "../../redux/actions/actions";
 import axios from "axios";
 
 const SearchBar = () => {
-   const {characters} = useSelector((state) => state);
+   const {characters, access} = useSelector((state) => state);
 
    const dispatch = useDispatch();
 
@@ -42,6 +42,10 @@ const SearchBar = () => {
       };
    };
 
+   const logOut = () => {
+      dispatch(log(false));
+   };
+
    return (
       <div>
          <input 
@@ -56,6 +60,9 @@ const SearchBar = () => {
             <button onClick={() => random(Math.floor(Math.random() * 826) + 1)} className="nav-button">Random</button>
             <button onClick={() => all()} className="nav-button">All</button>
             <button onClick={() => onClear()} className="nav-button">Clear</button>
+         </Link>
+         <Link to="/login">
+            <button onClick={() => logOut()} className="nav-button nav-button-out">{access ? "Log out" : "Login"}</button>
          </Link>
       </div>
    );

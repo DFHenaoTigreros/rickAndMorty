@@ -4,6 +4,8 @@ const postFav = async (req, res) => {
   try {
     const{id, name, image} = req.body;
 
+    console.log(id, name, image)
+
     if(!id || !name || !image) return res.status(401).send("Faltan datos");
   
     await Favorite.findOrCreate({where: {id, name, image}})

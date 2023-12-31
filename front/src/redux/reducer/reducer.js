@@ -1,10 +1,11 @@
-import {ADD_FAV, REMOVE_FAV, ORDER, STATUS, SPECIES, GENDER, EPISODE, CHARACTERS, CLEAR, SEARCH_CHARACTERS, RANDOM, DELETE_CHARACTER} from "../action-types/action-types";
+import {ADD_FAV, REMOVE_FAV, ORDER, STATUS, SPECIES, GENDER, EPISODE, CHARACTERS, CLEAR, SEARCH_CHARACTERS, RANDOM, DELETE_CHARACTER, ACCESS} from "../action-types/action-types";
 
 const initialState = {
   myFavorites: [],
   allFavorites: [],
   characters: [],
-  allCharacters: []
+  allCharacters: [],
+  access: false,
 };
 
 const reducer = (state = initialState, {type, payload}) => {
@@ -33,6 +34,8 @@ const reducer = (state = initialState, {type, payload}) => {
       return {...state, characters: [...state.characters, payload]};
     case DELETE_CHARACTER: 
       return {...state, characters: state.characters.filter((character) => character.id !== payload)}
+    case ACCESS:
+      return {...state, access: payload};
     default:
       return {...state};
   }

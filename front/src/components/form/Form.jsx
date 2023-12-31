@@ -1,6 +1,8 @@
 import axios from "axios";
 import {useState} from "react";
+import {useDispatch} from "react-redux";
 import {useNavigate, Link, useLocation} from "react-router-dom";
+import {log} from "../../redux/actions/actions";
 import validation from "./validation";
 import "./Form.css";
 
@@ -8,6 +10,8 @@ const Form = () => {
   const navigate = useNavigate();
 
   const {pathname} = useLocation();
+
+  const dispatch = useDispatch();
 
   const [userData, setUserData] = useState({
     email: "",
@@ -29,14 +33,19 @@ const Form = () => {
   const login = async () => {
     try {
       const { email, password } = userData;
-      pathname === "/login" ? await axios(`http://localhost:3001/rickandmorty/login/?email=${email}&password=${password}`) : await axios.post("http://localhost:3001/rickandmorty/login/", userData);
-      const {access} = data;
-      setAccess(data);
-      access && navigate('/');
+
+      if (pathname === "/login") {
+        const {data} = await axios(`http://localhost:3001/rickandmorty/login/?email=${email}&password=${password}`);
+        const {access} = data;
+        dispatch(log(access));
+        data && navigate("/");
+      } else if (pathname === "/register") {
+        await axios.post("http://localhost:3001/rickandmorty/login/", userData);
+      };
     } catch (error) {
       throw Error(error.message);
-    }
-  }
+    };
+  };
 
   return (
     <div className="container">
@@ -51,10 +60,11 @@ const Form = () => {
         <input type="password" name="password" value={userData.password} onChange={handleChange} className="input"/>
         {errors.password && <p className="error">{errors.password}</p>}
 
-        <button type="submit" className="submit-button" disabled={!userData.email || !userData.password || errors.email || errors.password}>Submit
+        <button type="submit" className="submit-button" disabled={!userData.email || !userData.password || errors.email || errors.password}>{pathname === "/login" ? "Login" : "Register"}
         </button>
 
-        {pathname === "/login" ? <p className="error">{"Si no tienes cuenta "}<Link to="/register">Registrate</Link></p> : <p className="error">{"Si ya tienes cuenta "}<Link to="/login">Logueate</Link></p>}
+        {pathname === "/login" ? <p className="error">{"If you do not have an account "}<Link to="/register">Sign up</Link></p> : <p className="error">{"If you have an account "}<Link to="/login">Log in</Link></p>}
+        
       </form>
     </div>
   );
