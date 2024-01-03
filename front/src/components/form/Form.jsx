@@ -35,12 +35,12 @@ const Form = () => {
       const { email, password } = userData;
 
       if (pathname === "/login") {
-        const {data} = await axios(`http://localhost:3001/rickandmorty/login/?email=${email}&password=${password}`);
+        const {data} = await axios(`/rickandmorty/login/?email=${email}&password=${password}`);
         const {access} = data;
         dispatch(log(access));
         data && navigate("/");
       } else if (pathname === "/register") {
-        await axios.post("http://localhost:3001/rickandmorty/login/", userData);
+        await axios.post("/rickandmorty/login/", userData);
       };
     } catch (error) {
       throw Error(error.message);

@@ -1,7 +1,7 @@
 import axios from "axios";
 import {ADD_FAV, REMOVE_FAV, ORDER, STATUS, SPECIES, GENDER, EPISODE, CHARACTERS, CLEAR, SEARCH_CHARACTERS, RANDOM, DELETE_CHARACTER, ACCESS} from "../action-types/action-types";
 
-const endpoint = "http://localhost:3001/rickandmorty/";
+const endpoint = "/rickandmorty/";
 
 export const addFav = (character) => {
   return async (dispatch) => {

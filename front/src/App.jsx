@@ -26,7 +26,7 @@ const App = () => {
     dispatch(allCharacters());
   }, []);
 
-  const paths = ["/", "/about", "/detail:id", "/favorites"];
+  const paths = ["/", "/about", "/detail/:id", "/favorites"];
 
   return (
     <div className='App'>

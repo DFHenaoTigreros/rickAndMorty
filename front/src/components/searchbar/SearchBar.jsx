@@ -30,7 +30,7 @@ const SearchBar = () => {
 
    const random = async (id) => {
       try {
-         const {data} = await axios(`http://localhost:3001/rickandmorty/character/${id}`);
+         const {data} = await axios(`/rickandmorty/character/${id}`);
          if (!characters.some((character) => character.id === data.id)) {
             dispatch(addRandom(data));
             setTimeout(() => {
