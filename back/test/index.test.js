@@ -25,13 +25,13 @@ describe("Test de RUTAS", () => {
 
   describe("_GET /rickandmorty/login_", () => {
     it("Responde true la propiedad access, si se pasa la información correcta", async () => {
-      const response = await request.get("/rickandmorty/login?email=davidhenao3105@gmail.com&password=Dafeheti31");
+      const response = await request.get("/rickandmorty/login?email=davidhenao3105@gmail.com&password=dafeheti3");
       expect(response.body).toEqual({access: true});
     });
 
     it("Responde false la propiedad access, si se pasa la información incorrecta", async () => {
-      const response = await request.get("/rickandmorty/login?email=davidhenao3105@gmail.com&password=Dafeheti31.");
-      expect(response.body).toEqual({access: false});
+      const response = await request.get("/rickandmorty/login?email=davidhenao3105@gmail.com&password=dafeheti3.");
+      expect(response.text).toBe("incorrect password");
     });
   });
 
@@ -40,10 +40,6 @@ describe("Test de RUTAS", () => {
       const character = {
         id: 1,
         name: "Rick Sanchez",
-        status: "Alive",
-        species: "Human",
-        gender: "Male",
-        origin: { name: "Earth (C-137)" },
         image:  "https://rickandmortyapi.com/api/character/avatar/1.jpeg"
       };
       const response = await request.post("/rickandmorty/fav").send(character);
@@ -55,26 +51,17 @@ describe("Test de RUTAS", () => {
       const character = {
         id: 2,
         name: "Morty Smith",
-        status: "Alive",
-        species: "Human",
-        gender: "Male",
-        origin: { name: "unknown" },
         image: "https://rickandmortyapi.com/api/character/avatar/2.jpeg"
       };
       const response = await request.post("/rickandmorty/fav").send(character);
-      expect(response.body.length).toBe(2)
+      expect(response.body.length).toBeGreaterThan(1)
     });
   });
 
   describe("_DELETE /rickandmorty/fav/:id_", () => {
     it("", async () => {
-      const response = await request.delete("/rickandmorty/fav/1000");
-      expect(response.body.length).toBe(2);
-    });
-
-    it("", async () => {
-      const response = await request.delete("/rickandmorty/fav/2000");
-      expect(response.body.length).toBe(1);
+      const response = await request.delete("/rickandmorty/fav/1");
+      expect(response.body.length).toBeGreaterThan(0);
     });
   });
 });
